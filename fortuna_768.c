@@ -62,7 +62,7 @@ static inline void reseed_state(F768State* rng) {
     }
 }
 
-// Verifying validity of in is left to caller
+// Verifying validity of buf is left to caller
 static inline void increment_block(uint8_t* buf) {
     for (uint64_t i = 0; i < 48; i++) {
         if (++buf[i]) {
