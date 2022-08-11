@@ -51,7 +51,7 @@ static inline void rand_block(F768State* rng, uint8_t* out) {
 
 // Verifying validity of rng is left to caller
 static inline void reseed_state(F768State* rng) {
-    uint64_t pool_id = __builtin_ctzll(++rng->ctr);
+    uint64_t pool_id = (uint64_t)__builtin_ctzll(++rng->ctr);
     uint8_t* reseed_ptr = rng->reservoir + pool_id * 48;
     uint8_t reseed_block[48];
     memcpy(reseed_block, reseed_ptr, 48);
