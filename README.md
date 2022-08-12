@@ -1,4 +1,4 @@
-# fortuna_768
+# fortuna_3072
 Custom Implementation of a Fortuna CSPRNG Varient
 
 Know what /dev/random is? Well this is basically that same level of CSPRNG.
