@@ -14,9 +14,9 @@ static inline void increment_block(uint8_t* buf);
 void f3072_random_fill(F3072State* rng, uint8_t* buf, uint64_t len) {
     if (rng && buf && len) {
         uint64_t rem_bytes = len % 48;
-        for (uint64_t block = 0; block < len / 48; block++) {
-            rand_block(rng, buf + block * 48);
-            if (block % 65536 == 0) {
+        for (uint64_t i = 0; i < len / 48; i++) {
+            rand_block(rng, buf + i * 48);
+            if (i % 65536 == 0) {
                 reseed_state(rng);
             }
         }
@@ -31,7 +31,7 @@ void f3072_random_fill(F3072State* rng, uint8_t* buf, uint64_t len) {
 
 void f3072_add_entropy(F3072State* rng, uint8_t* buf, uint64_t len) {
     if (rng && buf && len) {
-        for (uint16_t i = 0; i < len; i++) {
+        for (uint64_t i = 0; i < len; i++) {
             if (rng->mix % 48 == 0) {
                 uint8_t* addr = rng->reservoir + rng->mix;
                 chacha12(addr, addr);
